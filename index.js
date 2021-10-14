@@ -1,16 +1,18 @@
 var buttonNumber = document.querySelectorAll(".drum").length;
 
-for (i = 0; i < buttonNumber; i++) {
+for (var i = 0; i < buttonNumber; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", buttonClick);
 }
 
 function buttonClick() {
   var buttonInnerHTML = this.innerHTML;
   makeSound(buttonInnerHTML);
+  buttonAnimation(buttonInnerHTML);
 }
 
 document.addEventListener("keypress", function (event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -48,4 +50,14 @@ function makeSound(key) {
       console.log(buttonInnerHTML);
       break;
   }
+}
+
+function buttonAnimation(currentkey) {
+  var activeButton = document.querySelector("." + currentkey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
